@@ -1,0 +1,39 @@
+<div class="authform">
+  <h3>Edit User</h3>
+
+  <%= form_for (@user)  do |f| %>
+    <div class="field form-group">
+      <%= f.label :Username %><br />
+      <%= f.text_field :username, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :role %>
+      <%= f.select "email", ['User', 'Admin'],{}, {required: true, :prompt =>  "#{@user.role}", :selected => @user.role, class: 'form-control'} %>
+     
+    </div>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div class="form-group">
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, class: 'form-control' %>
+      </div>
+    </fieldset>
+    <%= f.submit 'Update', :class => 'button left' %>
+    <%= button_to "Cancel", '/users/cancel_edit', :data => { :confirm => "Are you sure?" }, :class => 'button right' %>
+  <% end %>
+</div

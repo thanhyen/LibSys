@@ -1,0 +1,33 @@
+<div class="authform">
+  <h3>Edit Book</h3>
+  
+  <%= form_for(@book) do |f| %>
+    <div class="form-group">
+      <%= f.label :ISBN %>
+      <%= f.text_field :ISBN, :autofocus => true, class: 'form-control' %>
+    </div>
+    
+    <div class="field form-group">
+      <%= f.label :title %><br/>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :description %><br/>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :authors %><br/>
+      <%= f.text_field :authors, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :status %><br/>
+      <%= f.select "status", ['available', 'check-out'], {}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+    </div>
+    <%= f.submit 'Update', :class => 'button left' %>
+    <%= button_to "Cancel", books_cancel_path, method: :get, :data => { :confirm => "Are you sure?" }, :class => 'button right' %>
+  <% end %>
+</div>
+

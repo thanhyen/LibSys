@@ -1,0 +1,44 @@
+<div class="authform" style="margin: 0 auto;  " %>
+ 	<h2>Book Detail:</h2>
+
+ 	<form>
+ 		 <div class="form-group">
+		     <label>ISBN</label>
+		     <input autofocus = true value = <%= @book.ISBN %> class = 'form-control' disabled />
+	    </div>
+	     <div class="form-group">
+		     <label>Title</label>
+		     <input autofocus = true value = <%= @book.title %> class = 'form-control' disabled />
+	    </div>
+	     <div class="form-group">
+		     <label>Description</label>
+		     <input autofocus = true value = <%= @book.description %> class = 'form-control' disabled />
+	    </div>
+	     <div class="form-group">
+		     <label>Authors</label>
+		     <input autofocus = true value = <%= @book.authors %> class = 'form-control' disabled />
+	    </div>
+	     <div class="form-group">
+		     <label>Status</label>
+		     <input autofocus = true value = <%= @book.status %> class = 'form-control' disabled />
+	    </div>
+	    <% if @book.status == 'check-out' %>
+			<div class="form-group">
+			     <% if @user = @book.user? %>
+			     <label>Checkouted user</label>
+			     <input autofocus = true value = <%= @user.email %> class = 'form-control' disabled />
+			     <% end %>
+	   		 </div>  	
+		<% end %>
+		<% if @book.user? %>
+			<div class="form-group">
+		      <label>Checkout History</label>
+		      <select>
+		     	<% @book.user.each do |u| %>
+		     		<option> <% u.username + "--" + u.email  %> </option>
+		     	<% end %>
+		      </select>
+		    </div>
+	    <% end %>
+ 	</form>
+</div>

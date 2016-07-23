@@ -1,0 +1,46 @@
+<div class="authform">
+  <h3>Edit <%= resource_name.to_s.humanize %></h3>
+  <%#@user = User.new %>
+   <%= form_for(@user, :url => '/users', :html => { :method => :put}) do |f| %>
+
+
+    <div class="field form-group">
+      <%= f.label :Username %><br />
+      <%= f.text_field :username, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :role %>
+      <%= f.select "email", ['User', 'Admin'],{}, {required: true, class: 'form-control'} %>
+     
+    </div>
+    <fieldset>
+      <!-- <p>Leave these fields blank if you don't want to change your password.</p> -->
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <!-- <p>You must enter your current password to make changes.</p> -->
+      <div class="form-group">
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, class: 'form-control' %>
+      </div>
+    </fieldset>
+    <%= f.submit 'Update', :class => 'button left' %>
+    <%= button_to "Cancel", '/users/cancel_edit', :data => { :confirm => "Are you sure?" }, :class => 'button right' %>
+  <% end %>
+</div

@@ -1,0 +1,34 @@
+<div class="authform" style="margin: 0 auto">
+	<h1>Add a new book</h1>
+	<%= form_for(@book) do |f| %>	
+		<div class="field form-group">
+			<%= f.label :ISBN %><br/>
+			<%= f.text_field :ISBN, autofocus: true, class: 'form-control' %>
+		</div>
+
+		<div class="field form-group">
+			<%= f.label :title %><br/>
+			<%= f.text_field :title, class: 'form-control' %>
+		</div>
+
+		<div class="field form-group">
+			<%= f.label :description %><br/>
+			<%= f.text_field :description, class: 'form-control' %>
+		</div>
+
+		<div class="field form-group">
+			<%= f.label :authors %><br/>
+			<%= f.text_field :authors, class: 'form-control' %>
+		</div>
+
+		<div class="field form-group">
+			<%= f.label :status %><br/>
+			<%= f.select "status", ['available', 'check-out'], {}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+		</div>
+
+		<div class="actions form-group">
+      		<%= f.submit "Create book", :class => 'button' %>
+		</div>
+	<% end %>
+</div>
+
