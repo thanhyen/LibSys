@@ -28,16 +28,17 @@ class UserManagementController < ApplicationController
 
 	def update
 		
-		if @user.update(user_params)
+		@user.update(user_params)
+		if @user.save
 			flash[:success] = "update user successfully!"
 			# redirect_to '/users_list'
 			redirect_to '/users'
 		else
-			# puts "error update"
 			render 'edit'
 			flash[:error] = @user.errors.messages
 		end
 	end
+
 	def cancel_edit
 		redirect_to '/users'
 	end

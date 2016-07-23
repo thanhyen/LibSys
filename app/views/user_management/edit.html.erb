@@ -1,3 +1,4 @@
+
 <div class="authform">
   <h3>Edit User</h3>
 
@@ -14,13 +15,13 @@
 
     <div class="field form-group">
       <%= f.label :role %>
-      <%= f.select "email", ['User', 'Admin'],{}, {required: true, :prompt =>  "#{@user.role}", :selected => @user.role, class: 'form-control'} %>
+      <%= f.select :role, ['User', 'Admin'],{}, {required: true, :prompt =>  "#{@user.role}", :selected => @user.role, class: 'form-control'} %>
      
     </div>
     <fieldset>
       <div class="form-group">
         <%= f.label :password %>
-        <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
+        <%= f.password_field :password, :autocomplete => 'off', value: @user.password, class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= f.label :password_confirmation %>

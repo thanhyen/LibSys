@@ -9,6 +9,9 @@ class Book
   field :description, type: String, default: ''
   field :authors, type: String, default: ''
   field :status, type: String, default: 'available'
+  field :image, type: String
+
+  mount_uploader :image, ImageUploader
 
   belongs_to :user
 

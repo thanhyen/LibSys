@@ -1,6 +1,6 @@
 <div class="authform" style="margin: 0 auto">
 	<h1>Add a new book</h1>
-	<%= form_for(@book) do |f| %>	
+	<%= form_for @book, :html => { :multipart => true } do |f| %>	
 		<div class="field form-group">
 			<%= f.label :ISBN %><br/>
 			<%= f.text_field :ISBN, autofocus: true, class: 'form-control' %>
@@ -25,6 +25,8 @@
 			<%= f.label :status %><br/>
 			<%= f.select "status", ['available', 'check-out'], {}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
 		</div>
+
+		<p><%= f.file_field :image %></p>
 
 		<div class="actions form-group">
       		<%= f.submit "Create book", :class => 'button' %>

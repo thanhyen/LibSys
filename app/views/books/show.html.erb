@@ -24,19 +24,21 @@
 	    </div>
 	    <% if @book.status == 'check-out' %>
 			<div class="form-group">
-			     <% if @user = @book.user? %>
-			     <label>Checkouted user</label>
-			     <input autofocus = true value = <%= @user.email %> class = 'form-control' disabled />
-			     <% end %>
+				<% @user = @book.user %>
+			    <% if @user %>
+			      <label>Checkouted user</label>
+			      <input autofocus = true value = <%= @user.username + "---" + @user.email %> class = 'form-control' disabled />
+			    <% end %>
 	   		 </div>  	
 		<% end %>
-		<% if @book.user? %>
+
+		<% if @book.user %>
 			<div class="form-group">
 		      <label>Checkout History</label>
 		      <select>
-		     	<% @book.user.each do |u| %>
-		     		<option> <% u.username + "--" + u.email  %> </option>
-		     	<% end %>
+		 
+		     		<option> <% @book.user.username + "--" + @book.user.email  %> </option>
+		     
 		      </select>
 		    </div>
 	    <% end %>

@@ -37,6 +37,8 @@ gem 'mongoid'
 gem 'bootstrap-sass'
 gem 'pry-rails'
 gem 'pry'
+gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
