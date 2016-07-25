@@ -27,7 +27,7 @@
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
-    
+    <p><% current_user.email%></p>
     <%= button_to "Close", '/users', :class => 'button right' %>
   <% end %>
 </div

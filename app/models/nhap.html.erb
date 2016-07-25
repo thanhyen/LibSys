@@ -1,0 +1,18 @@
+<li>
+                            <a href="/users/edit" class="e_ajax_link">
+                                 <i class="icon16 i-user"></i>Profile 
+                            </a> 
+                            
+                          </li>
+                           <li>
+                            <a href="/users/sign_out" class="">
+                               <i class="icon16 i-exit"></i>Logout                                
+                            </a>edit_user_path(:id => user.id.to_s)
+                          </li>
+
+                          <% if !@users.present? %>
+	                		<tr>
+	                			<td colspan="6">No user found</td>
+	                		</tr>
+	                	<% else %>
+	                	<% end %>

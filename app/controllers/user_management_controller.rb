@@ -1,12 +1,13 @@
 class UserManagementController < ApplicationController
-	before_action :find_user, only: [:edit, :update, :destroy, :show]
+	before_action :find_user, only: [:edit, :update, :destroy, :show, :checkout_history]
 	def index
 		@users = User.all
+		@current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
 	end
 
-	# def show
-	# 	@user = User.find(params[:id])
-	# end
+	def show
+		@user = User.find(params[:id])
+	end
 
 	def new
 		@user = User.new
@@ -44,14 +45,36 @@ class UserManagementController < ApplicationController
 	end
 
 	def destroy
-
-		if @user.destroy
+		if @user.id != current_user.id
+		  if @user.destroy
 			flash[:success] = "DELELTE user successfully!"
 			redirect_to '/users'
-		else
+		  else
 			flash[:error] = @user.errors.messages
+		  end
+		else
+			flash.alert = "You can't Delete yourself!"
 		end
+		
 	end
+
+	# search
+ 
+	def search
+	  @users = User.all
+	  if params[:search]
+	    @users = User.search(params[:search]).order("created_at DESC")
+	    # binding.pry
+	  else
+	    @users = User.all.order('created_at DESC')
+	  end
+	end
+
+	# checkout history
+	def checkout_history
+		@histories = History.check_his_user(@user.id)
+	end
+
 	private
 	def find_user
 		@user = User.where(id: params[:id]).first

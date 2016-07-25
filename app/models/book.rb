@@ -2,6 +2,7 @@ class Book
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Attributes::Dynamic
+  Mongoid.raise_not_found_error = false
   
   # fields belongs to book model: ISBN, title, description, authors, status (checkout || available)
   field :ISBN, type: String, default: ''
@@ -14,6 +15,15 @@ class Book
   mount_uploader :image, ImageUploader
 
   belongs_to :user
+  has_many :histories, class_name: "History"
+
+  def self.search(q)
+    Book.any_of({:ISBN => /#{q}/i}, {:title => /#{q}/i}, {:description => /#{q}/i}, 
+      {:authors => /#{q}/i}, {:status => /#{q}/i})
+  end
+  def self.find_book (book_id)
+    Book.where(:id => book_id).first
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

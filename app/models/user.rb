@@ -35,6 +35,16 @@ class User
   field :last_sign_in_ip,    type: String
 
   has_many :books
+  has_many :histories, class_name: "History"
+
+
+def self.search(q)
+  User.any_of({:username => /#{q}/i}, {:email => /#{q}/i}, {:role => /#{q}/i})
+end
+
+def self.find_user (user_id)
+  User.where(:id => user_id).first
+end
 
   ## Confirmable
   # field :confirmation_token,   type: String

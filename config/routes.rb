@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get '/users', to: 'user_management#index'
   
 
@@ -7,28 +8,36 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
     
   }
-  root to: "home#index"
+ root to: "home#index"
   get 'home/index'
 
   # 
 
-  resources :books
+  resources :books do
+    member do
+      get '/borrow_return', to: 'books#borrow_return'
+    end
+  end
   get 'books/cancel', to: 'books#cancel'
+  get 'books/search/detail', to: 'books#search'
+  
+  
  
   # resources :user_management  
   # get '/user_management/:id/edit', to: "user_management#edit"
-  resources :user_management, as: 'user', only: %w[ edit update destroy ] do
+  resources :user_management, as: 'user', only: %w[ edit update destroy search show ] do
     member do
     end
   end
 
-  resources :user_management, only: %w[ cancel_edit ] do
+  resources :user_management, only: %w[ cancel_edit search ] do
     member do
       # patch 'update', to: 'user_management#update'
       # get 'edit', to: 'user_management#edit'
     end
     collection do
-      get '/users/cancel_edit', to: 'user_management#cancel_edit'
+      get '/search', to: 'user_management#search'
+      get '/cancel_edit', to: 'user_management#cancel_edit'
     end
   end
 

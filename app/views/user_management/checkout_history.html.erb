@@ -1,0 +1,17 @@
+<% if !@history.empty?  %>
+			<div class="form-group">
+		      <label>Checkout History</label>
+		      <select>
+		 			
+		 			<% @history.each do |h| %>
+		 			  <option> *************************** </option>
+
+		     		  <option> User_id -- <%= h.user.role %> </option>
+		     		  <option> Checkout date -- <%= h.checkout_date.strftime("%Y-%m-%d %H:%M:%S")  unless h.checkout_date.blank? %> </option>
+		     		  <option> Return date -- <%= h.return_date.strftime("%Y-%m-%d %H:%M:%S") unless h.return_date.blank? %> </option>
+		     		  <option> *************************** </option>
+		     		<% end %>
+		     
+		      </select>
+		    </div>
+	    <% end %>

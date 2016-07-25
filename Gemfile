@@ -39,6 +39,7 @@ gem 'pry-rails'
 gem 'pry'
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'font-awesome-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

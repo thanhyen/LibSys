@@ -13,6 +13,27 @@
       <label>Email</label>
       <input autofocus = true value = <%= @user.email %> class = 'form-control' disabled />
     </div>
+
+    <% if !@user.histories.empty?  %>
+      <div class="form-group">
+          <label>Checkout History</label>
+          <select class = 'form-control'  >
+          <% @user.histories.each do |h| %>
+            <% if !h.book.blank? %>
+              <option> Book IBSN -- <%= h.book.ISBN %> </option>
+              <option> Book title -- <%= h.book.title  %> </option>
+              <option> Book description -- <%= h.book.description  %> </option>
+              <option> Book authors -- <%= h.book.authors  %> </option>
+              <option> Book status -- <%= h.book.status  %> </option>
+            <% end %>
+              <option> Checkout date -- <%= h.checkout_date.strftime("%Y-%m-%d %H:%M:%S")  unless h.checkout_date.blank? %> </option>
+              <option> Return date -- <%= h.return_date.strftime("%Y-%m-%d %H:%M:%S") unless h.return_date.blank? %> </option>
+               <option> *************************** </option>
+            <% end %>
+         
+          </select>
+        </div>
+      <% end %>
     
   </form>
 </div

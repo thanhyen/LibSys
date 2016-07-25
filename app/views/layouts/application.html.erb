@@ -33,13 +33,36 @@
           <li><%= link_to 'Home', root_path, class: 'navbar-brand' %></li>
           <li> <%= link_to 'Book-Management', '/books', class: 'navbar-brand' %></li>
           <li><%= link_to 'User-Management', '/users', class: 'navbar-brand' %></li>
-          <li><%= link_to 'About', '/', class: 'navbar-brand' %></li>
-          <li><%= link_to 'Contact', '/', class: 'navbar-brand' %></li>
+        
           
         </ul>
         <div style="float: right; display: inline-block">
-          <%= link_to 'Sign in', '/users/sign_in', class: 'navbar-brand' %>
-         <%= link_to 'Sign out', '/users/sign_out', class: 'navbar-brand' %>
+        <!--  -->
+        <% if current_user %>
+        <div class="nav-no-collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown user">
+                      <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+                          <span style="font-weight: bold; color: #9d9d9d; font-size: 18px;"> <%= current_user.email %></span>
+                          <span class="more">
+                              <i class="fa fa-caret-down"></i>
+                          </span>
+                      </a>
+                      <ul class="dropdown-menu">
+                      
+                          <li style="border-bottom: 2px solid #ccc; padding: 10px;font-size: 18px;"><i class="fa fa-user"></i><%= link_to 'Profile', edit_user_path(:id => current_user.id.to_s), class: '', style: 'display: inline' %>
+                          </li>
+
+                          <li style="padding: 10px;font-size: 18px;"><i class=" fa fa-sign-out"></i><%= link_to 'Logout', destroy_user_session_path, class: '', style: 'display: inline' %>
+                          </li>
+                      
+                      </ul>
+            </li>
+          </ul>
+        </div>
+        <% end %>
+        <!--  -->
+          
         </div>
       </div>
       
