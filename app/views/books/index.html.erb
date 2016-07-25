@@ -2,7 +2,8 @@
  	<h2>Book Management:</h2>
  	<div class="form-group">
 		<%= form_tag('books/search/detail', :method => "get", id: "search-form") do %>
-		  <%= text_field_tag :search, params[:search], placeholder: "Search book", :type => "search" %>
+		  <%= text_field_tag :search, params[:search], placeholder: "Search book", :type => "search", :type => "search", style: "border-radius: 6px;
+    padding: 10px 15px;" %>
 		<% end %>
 	</div>
 	<div class="form-group">
@@ -42,13 +43,15 @@
 		                		  <input type="hidden" name="click" value= <%= @click %>>
 		                		</td>
 		                		<td><%= image_tag book.image_url.to_s %></td>
-		                		<%# if current_user.role == 'Admin' %>
+		                		
 			                		<td class="text-center" >
-			                			<%= link_to "View", book_path(book) %>
-			                			<%= link_to "Edit", edit_book_path(book) %>
-			                			<%= link_to "Delete", book, method: :delete, :data =>  {:confirm => 'Are you sure to delete this book ?'} %>
+			                			<button class="right submit" ><%= link_to "View", book_path(book), :style => "color: #fff; font-weight: bold" %></button>
+			                			<% if current_user.role == 'Admin' %>
+			                			<button class="right submit" ><%= link_to "Edit", edit_book_path(book),:style => "color: #fff; font-weight: bold" %></button>
+			                			<button class="right submit" style="background: red;" ><%= link_to "Delete", book, method: :delete, :data =>  {:confirm => 'Are you sure to delete this book ?'} , :style => "color: #fff; font-weight: bold; background-color: red"%></button>
+			                			<% end %>
 			                		</td>
-			                	<% #end %>
+			                	
 		                	</tr>
 		                	<% end %>
 	                	<% end %>
@@ -57,7 +60,9 @@
 	            </table>
 	       	</div>
 	   	</div>
-	   	<button class="right submit" style=""><%= link_to 'Add a book', '/books/new', :style => "color: #fff; font-weight: bold"%></button>
+	   	<% if current_user.role == 'Admin' %>
+	   	<button class="right submit" ><%= link_to 'Add a book', '/books/new', :style => "color: #fff; font-weight: bold"%></button>
+	   	<% end %>
 	</div>
  
 </div>

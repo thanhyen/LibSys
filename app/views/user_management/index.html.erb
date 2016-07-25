@@ -4,7 +4,8 @@
 
 	<div class="form-group">
 		<%= form_tag('user_management/search', :method => "get", id: "search-form") do %>
-		  <%= text_field_tag :search, params[:search], placeholder: "Search user", :type => "search" %>
+		  <%= text_field_tag :search, params[:search], placeholder: "Search user", :type => "search", style: "border-radius: 6px;
+    padding: 10px 15px;" %>
 		<% end %>
 	</div>
  	
@@ -18,8 +19,8 @@
 	                        <th class="col-md-2 text-center">Username</th>
 	                        <th class="col-md-2 text-center">Email</th>
 	                        <th class="col-md-2 text-center">Password</th>
-	                        <th class="col-md-2 text-center">Role</th>
-	                        <th class="col-md-2 text-center">action</th>
+	                        <th class="col-md-1 text-center">Role</th>
+	                        <th class="col-md-3 text-center">action</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -36,19 +37,24 @@
 	                		<td><%= Digest::SHA1.hexdigest(user.password.to_s) %></td>
 	                		<td><%= user.role %></td>
 	                		<td class="text-center">
-	                			<%= link_to "View", user_path(user) %>
-	                			<%= link_to "Edit", edit_user_path(:id => user.id.to_s) %>
-	                			<%= link_to "Delete", user_path(user), method: :delete, :data =>  {:confirm => 'Are you sure to delete this user ?'} %>
+	                			<button class="right submit" ><%= link_to "Detail", user_path(user), :style => "color: #fff; font-weight: bold" %></button>
+	                			<% if current_user.role == 'Admin' %>
+	                				<button class="right submit" ><%= link_to "Edit", edit_user_path(:id => user.id.to_s), :style => "color: #fff; font-weight: bold" %></button>
+	                				<button class="right submit" style="background: red;"><%= link_to "Delete", user_path(user), method: :delete, :data =>  {:confirm => 'Are you sure to delete this user ?'}, :style => "color: #fff; font-weight: bold; background-color: red" %></button>
+	                			<% end %>
+	                			
 	                		</td>
 	                	</tr>
-	                	<% end %>
+	                		<% end %>
 	                	<% end %>
 	                	
 	                </tbody>
 	            </table>
 	       	</div>
 	   	</div>
-	   	<button class="right submit" style=""><%= link_to 'Add a user', '/users/sign_up', :style => "color: #fff; font-weight: bold"%></button>
+	   <% if current_user.role == 'Admin' %>	
+	   	<button class="right submit" style=""><%= link_to 'Add a user', '/users/sign_up', :style => "color: #fff; font-weight: bold"%></button
+	   <% end %>	
 	</div>
  
 </div>

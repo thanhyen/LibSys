@@ -2,7 +2,7 @@ class UserManagementController < ApplicationController
 	before_action :find_user, only: [:edit, :update, :destroy, :show, :checkout_history]
 	def index
 		@users = User.all
-		@current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+		# @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
 	end
 
 	def show
@@ -10,7 +10,11 @@ class UserManagementController < ApplicationController
 	end
 
 	def new
-		@user = User.new
+		if user_signed_in? && current_user.role == 'Admin'
+	      @user = User.new
+	      render 'new'
+    	end
+		# @user = User.new
 	end
 
 	def create
@@ -84,7 +88,7 @@ class UserManagementController < ApplicationController
 	end
 
 	def is_admin
-		if current_user.role == 'admin'
+		if current_user.role == 'Admin'
 			return true
 		else
 			return false
