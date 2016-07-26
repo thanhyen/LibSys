@@ -1,9 +1,15 @@
 class BooksController < ApplicationController
-	before_action :find_book, only: [:edit, :update, :show, :borrow_return]
+	before_action :find_book, only: [:edit, :update, :show, :borrow_return, :checkout_history]
 	def index
 		@books = Book.all
 	end
 	def show
+		@book = Book.find(params[:id])
+		# @history = History.check_his_book(@book.id)
+	end
+
+	# history
+	def history
 		@book = Book.find(params[:id])
 		@history = History.check_his_book(@book.id)
 	end
@@ -66,6 +72,7 @@ class BooksController < ApplicationController
 
 	# borrow-return
 	def borrow_return
+			 
 			@history = History.new
 			# @history.update(:book_id => @book.id, :user_id => current_user.id,:checkout_date => '', :return_date => '')
 			@history.book_id = @book.id
@@ -74,7 +81,7 @@ class BooksController < ApplicationController
 			@history.return_date = ''
 			
 		if @book.status == 'available'
-			
+			@history.action = 'Borrow'
 			@book.update({:status => "checkout"});
 			@book.update({:user => current_user});
 
@@ -83,6 +90,7 @@ class BooksController < ApplicationController
 			
 		else
 			if @book.status == 'checkout' 
+				@history.action = 'Return'
 				@book.update({:status => "available"});
 				@book.update({:user => nil});
 
@@ -90,8 +98,10 @@ class BooksController < ApplicationController
 				# @history.update({:return_date => Time.current()})
 			end
 		end
-		@history.save
-		render 'borrow_return'
+		if @history.save
+			flash.alert = @history.action + " book successfully!"
+		    render 'borrow_return'
+		end
 
 		# binding.pry
 		# if @book.update(book_params)

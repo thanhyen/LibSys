@@ -1,5 +1,5 @@
 class UserManagementController < ApplicationController
-	before_action :find_user, only: [:edit, :update, :destroy, :show, :checkout_history]
+	before_action :find_user, only: [:edit, :update, :destroy, :show, :checkout_history, :history]
 	def index
 		@users = User.all
 		# @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
@@ -7,6 +7,11 @@ class UserManagementController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+	end
+
+	# history
+	def history
+		
 	end
 
 	def new
@@ -18,11 +23,12 @@ class UserManagementController < ApplicationController
 	end
 
 	def create
-		@user = User.new
+		@user = User.new(sign_up_params)
 		if @user.save
 			flash[:success] = "create user successfully!"
 			redirect_to '/users'
-		else
+		else 
+			flash.alert = 'Sign up error!'
 			render 'new'
 			flash[:error] = @user.errors.messages
 		end
@@ -68,7 +74,6 @@ class UserManagementController < ApplicationController
 	  @users = User.all
 	  if params[:search]
 	    @users = User.search(params[:search]).order("created_at DESC")
-	    # binding.pry
 	  else
 	    @users = User.all.order('created_at DESC')
 	  end
@@ -86,6 +91,10 @@ class UserManagementController < ApplicationController
 	def user_params
 		params.require(:user).permit(:username, :email,:role, :password, :password_confirmation, :current_password)
 	end
+
+	def sign_up_params
+    	params.require(:user).permit(:email, :password, :password_confirmation)
+  	end
 
 	def is_admin
 		if current_user.role == 'Admin'

@@ -5,7 +5,9 @@ class History
 
   field :book_id, type: String, default: ''
   field :user_id, type: String, default: ''
+  field :action, type: String, default: ''
   field :checkout_date, type: Time, default: ''
+  field :return_date, type: Time, default: ''
   field :return_date, type: Time, default: ''
 
   belongs_to :user

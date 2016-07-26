@@ -1,11 +1,13 @@
-<h3>successfully!</h3>
-<div>
-	<h3>Details: </h3>
 
-	<p>Email member: <%=  @book.user ? @book.user.email : ''  %>	</p>
-	<p>Book title: <%= @book.title %>	</p>
-	<p>Book description: <%= @book.description %>	</p>
-	<p>Book authors: <%= @book.authors %>	</p>
-	<p>Book status: <%= @book.status %>	</p>
-	
+<div style="font-size: 18px">
+	<h3 style="font-weight: bold">Details: </h3>
+	<div><%= image_tag @book.image_url.to_s, :style => 'width: 75%;
+    margin-bottom: 20px;'  unless @book.image_url.blank? %></div>
+    <div style="padding: 20px; border-style: double;">
+		<p><span style="font-weight: bold">Email member: </span><%=  @book.user ? @book.user.email : ''  %>	</p>
+		<p><span style="font-weight: bold">Book title:</span> <%= @book.title %>	</p>
+		<p><span style="font-weight: bold">Book description:</span> <%= @book.description %>	</p>
+		<p><span style="font-weight: bold">Book authors: </span><%= @book.authors %>	</p>
+		<p><span style="font-weight: bold">Book status: </span><%= @book.status %>	</p>
+	</div>
 </div>

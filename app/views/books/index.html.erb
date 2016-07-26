@@ -1,5 +1,5 @@
 <div class="" style="margin: 0 auto;  " %>
- 	<h2>Book Management:</h2>
+ 	<h2 class="text-center" style="font-weight: bold;">Book Management</h2>
  	<div class="form-group">
 		<%= form_tag('books/search/detail', :method => "get", id: "search-form") do %>
 		  <%= text_field_tag :search, params[:search], placeholder: "Search book", :type => "search", :type => "search", style: "border-radius: 6px;
@@ -39,13 +39,13 @@
 		                		  <% else %>
 		                		    <button class=" submit" style="" id="br-btn"><%= link_to 'Return', borrow_return_book_path(book), :style => "color: #fff; font-weight: bold" %></button>
 		                		  <% end %>
-		                		  <input type="hidden" name="status" value= <%= book.status %>>
-		                		  <input type="hidden" name="click" value= <%= @click %>>
+		                		 
 		                		</td>
 		                		<td><%= image_tag book.image_url.to_s %></td>
 		                		
 			                		<td class="text-center" >
 			                			<button class="right submit" ><%= link_to "View", book_path(book), :style => "color: #fff; font-weight: bold" %></button>
+			                			<button class="right submit" ><%= link_to "History", history_book_path(book), :style => "color: #fff; font-weight: bold" %></button>
 			                			<% if current_user.role == 'Admin' %>
 			                			<button class="right submit" ><%= link_to "Edit", edit_book_path(book),:style => "color: #fff; font-weight: bold" %></button>
 			                			<button class="right submit" style="background: red;" ><%= link_to "Delete", book, method: :delete, :data =>  {:confirm => 'Are you sure to delete this book ?'} , :style => "color: #fff; font-weight: bold; background-color: red"%></button>
@@ -78,18 +78,6 @@
 	//   $('input[name=status]').val()= 'available';
 	// }
 	// $('input[name=click]').val() = true;	
-});
+// });
 
 </script>
-<!-- $('#br-btn').click(function(){
-	var stt = $('input[name=status]').val();
-	var cli = $('input[name=click]').val();
-
-	if(stt == 'available'){
-	  $('input[name=status]').val()= 'checkout';
-	}else{
-	  $('input[name=status]').val()= 'available';
-	}
-	$('input[name=click]').val() = true;	
-});
- -->

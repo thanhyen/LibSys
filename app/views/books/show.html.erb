@@ -2,6 +2,7 @@
  	<h2>Book Detail:</h2>
 
  	<form>
+ 	     <%= image_tag @book.image_url unless @book.image_url.blank? %>
  		 <div class="form-group">
 		     <label>ISBN</label>
 		     <input autofocus = true value = <%= @book.ISBN %> class = 'form-control' disabled />
@@ -31,24 +32,7 @@
 			    <% end %>
 	   		 </div>  	
 		<% end %>
-
-		<% if !@history.empty?  %>
-			<div class="form-group">
-		      <label>Checkout History</label>
-		      <select>
-		 			
-		 			<% @history.each do |h| %>
-		 			  <option> *************************** </option>
-
-		     		  <option> User_id -- <%= h.user.role %> </option>
-		     		  <option> Checkout date -- <%= h.checkout_date.strftime("%Y-%m-%d %H:%M:%S")  unless h.checkout_date.blank? %> </option>
-		     		  <option> Return date -- <%= h.return_date.strftime("%Y-%m-%d %H:%M:%S") unless h.return_date.blank? %> </option>
-		     		  <option> *************************** </option>
-		     		<% end %>
-		     
-		      </select>
-		    </div>
-	    <% end %>
-	    <button class="right submit" style=""><%= link_to 'Back', '/books', :style => "color: #fff; font-weight: bold"%></button
+	    <button class="left submit" style=""><%= link_to 'Back', '/books', :style => "color: #fff; font-weight: bold"%></button>
+	      <button class="right submit" style=""><%= link_to 'Show History',  history_book_path(@book), :style => "color: #fff; font-weight: bold"%></button>
  	</form>
 </div>

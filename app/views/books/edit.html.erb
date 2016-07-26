@@ -27,8 +27,8 @@
       <%= f.select "status", ['available', 'check-out'], {}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
     </div>
     <p><%= f.file_field :image %></p>
-    <%= f.submit 'Update', :class => 'button left' %>
-    <%= button_to "Cancel", books_cancel_path, method: :get, :data => { :confirm => "Are you sure?" }, :class => 'button right' %>
+    <%= f.submit 'Update', :class => 'button right submit', :style => "color: #fff; font-weight: bold" %>
+     <button class=" submit left" style=""><%= link_to 'Back', '/books', :data => { :confirm => "Are you sure?" },:style => "color: #fff; font-weight: bold"%></button>
   <% end %>
 </div>
 

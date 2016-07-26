@@ -34,7 +34,8 @@
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>
-    <%= f.submit 'Update', :class => 'button left' %>
-    <%= button_to "Cancel", '/users/cancel_edit', :data => { :confirm => "Are you sure?" }, :class => 'button right' %>
+    <%= f.submit 'Update', :class => 'submit button right' %>
+    <button class=" submit left" style=""><%= link_to 'Back', '/users', :data => { :confirm => "Are you sure?" },:style => "color: #fff; font-weight: bold"%></button>
+    
   <% end %>
 </div

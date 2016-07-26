@@ -38,6 +38,7 @@ gem 'bootstrap-sass'
 gem 'pry-rails'
 gem 'pry'
 gem 'mongoid-grid_fs', github: 'ahoward/mongoid-grid_fs'
+gem "rmagick"
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'font-awesome-rails'
 

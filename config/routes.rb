@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :books do
     member do
       get '/borrow_return', to: 'books#borrow_return'
+      get '/history', to: 'books#history'
     end
   end
   get 'books/cancel', to: 'books#cancel'
@@ -25,19 +26,20 @@ Rails.application.routes.draw do
  
   # resources :user_management  
   # get '/user_management/:id/edit', to: "user_management#edit"
-  resources :user_management, as: 'user', only: %w[ edit update destroy search show ] do
+  resources :user_management, as: 'user', only: %w[ edit update destroy search show create ] do
     member do
     end
   end
 
-  resources :user_management, only: %w[ cancel_edit search ] do
+  resources :user_management, only: %w[ cancel_edit search history create new ] do
     member do
       # patch 'update', to: 'user_management#update'
-      # get 'edit', to: 'user_management#edit'
+      get '/history', to: 'user_management#history'
     end
     collection do
       get '/search', to: 'user_management#search'
       get '/cancel_edit', to: 'user_management#cancel_edit'
+      get '/add_user/new', to: 'user_management#new'
     end
   end
 
